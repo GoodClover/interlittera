@@ -5,9 +5,7 @@ from time import sleep
 from pathlib import Path
 from pkgutil import iter_modules
 from importlib import import_module
-
-# TEMPORARY, should be imported from the file
-ALPHABET = list("abcdefghijklmnopqrstuvwxyz")
+from nice_arrays import *
 
 
 # Constants #
@@ -22,11 +20,6 @@ LAYOUT_PREFIX = "layout_"
 
 layouts_dir = Path(__file__).parent / "layouts"
 layouts_dir.mkdir(exist_ok=True)  # Make the folder if it donsen't exist.
-# Make __init__.py if it dosen't exist
-if not (layouts_dir_init := layouts_dir/"__init__.py").exists():
-    with open(layouts_dir_init, "w") as file:
-        file.write("# Automatically made")
-del layouts_dir_init
 
 plugins = {
     name: import_module(f"layouts.{name}")

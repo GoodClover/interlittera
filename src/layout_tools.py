@@ -4,7 +4,7 @@
 
 
 import keyboard
-from layouts.nice_arrays import *
+from nice_arrays import *
 
 
 # Decorate your Christmas trees!

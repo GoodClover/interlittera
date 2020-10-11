@@ -1,5 +1,5 @@
-from layouts.layout_tools import *
-from layouts.nice_arrays import *
+from layout_tools import *
+from nice_arrays import *
 import keyboard
 
 
