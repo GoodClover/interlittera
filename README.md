@@ -17,7 +17,7 @@ Also, I'm trying out some of GitHub's more complex features, that's why it may b
 ## Badges and stuff
 
 ![Python application](https://github.com/GoodClover/interlittera/workflows/Python%20application/badge.svg)
-![CodeQL](https://github.com/GoodClover/interlittera/workflows/CodeQL/badge.svg
+![CodeQL](https://github.com/GoodClover/interlittera/workflows/CodeQL/badge.svg)
 
 ## Legal garbage
 
