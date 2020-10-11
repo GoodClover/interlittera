@@ -1,5 +1,13 @@
 # Interlittera
 
+```
+interlittera / inter-littera (Latin)
+lit. between letter
+
+inter- : between
+littera: letter (alphabet)
+```
+
 hi - **Under construction**
 
 Please see [this tweet thread](https://twitter.com/_GoodClover_/status/1314891635927416833) for details.
