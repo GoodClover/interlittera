@@ -1,7 +1,7 @@
 # Module imports #
 
 import keyboard
-from time import sleep
+from time import sleep, time
 from pathlib import Path
 from pkgutil import iter_modules
 from importlib import import_module
@@ -18,6 +18,9 @@ LAYOUT_PREFIX = "layout_"
 
 # Load layouts/plugins #
 
+print("Loading playing/layouts... ", end="")
+t = time()
+
 layouts_dir = Path(__file__).parent / "layouts"
 layouts_dir.mkdir(exist_ok=True)  # Make the folder if it donsen't exist.
 
@@ -33,8 +36,12 @@ layouts = {
     for name, func in plugins[plugin_name].__dict__.items()
     if callable(func) and name.startswith(LAYOUT_PREFIX)
 }
+
+t = time()-t
+print(f"Done! {int(t*1000)}ms")
 print("Layouts:")
-print(layouts.keys())
+print(" " + ", ".join(layouts))
+print("Wait..", end="\u001B[G", flush=True)
 
 
 in_change_mode = False
@@ -51,18 +58,18 @@ def enter_change_mode(from_hotkey=False):
 
     if curr_layout:
         keyboard.unhook(curr_layout)
+        print("Normal keyboard.")
 
     if in_change_mode:
         in_change_mode = False
         keyboard.unhook(change_mode)
-        print("Exited change mode.")
         return
 
     else:
         in_change_mode = True
         keyboard.hook(change_mode, suppress=True)
         change_to = ""
-        print("Entered change mode.")
+        print("Type layout name/command: ", end="", flush=True)
         return
 
 
@@ -83,6 +90,7 @@ def change_mode(event):
         if change_to in layouts:
             curr_layout = layouts[change_to]
             keyboard.hook(curr_layout, suppress=True)
+            print(f"Changed layout to `{change_to}`.")
 
         elif change_to == "":
             print("Normal keyboard.")
@@ -91,19 +99,22 @@ def change_mode(event):
         #     importlib.reload(layouts)
 
         elif change_to == "exit" or change_to == "quit":
+            print("Bye! o/")
             exit()
 
         else:
             print("Not a layout!")
+            print("Normal keyboard.")
 
         change_to = ""
 
     elif event.event_type == "up":
         if event.name == "backspace":
             change_to = change_to[:-1]
-            print(f"\u001B[G{change_to} ", end="", flush=True)
+            print(f"\b", end="", flush=True)
         elif event.name in ALPHABET:
             change_to += event.name
+            print(event.name, end="", flush=True)
 
     print(f"\u001B[G{change_to}", end="", flush=True)
     pass
@@ -113,6 +124,7 @@ def main():
     keyboard.add_hotkey(HOTKEY, enter_change_mode, args=(True,), suppress=True,
                         timeout=1, trigger_on_release=True)
 
+    print("Ready!\n", flush=True)
     while True:
         sleep(60*60)
         print("T'as been hour, wot doing lad.")
