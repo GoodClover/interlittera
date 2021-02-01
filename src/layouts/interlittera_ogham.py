@@ -16,7 +16,11 @@ def layout_ogham(event):
         if ogham_lead != "":
             keyboard.send("backspace")
         text, ogham_lead = Ogham.ogham(
-            event.name, feather=False, return_lead=True, lead=ogham_lead)
+            event.name,
+            feather=False,
+            return_lead=True,
+            lead=ogham_lead,
+        )
         keyboard.write(text)
         if ogham_lead != "":
             keyboard.write(Ogham.ogham(ogham_lead, feather=False))

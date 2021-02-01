@@ -1,11 +1,10 @@
-
 replacements = {
     "j": "g",
     "k": "q",
     "v": "f",
     "w": "uu",
     "x": "z",
-    "y": "i"
+    "y": "i",
 }
 
 characters = {
@@ -30,22 +29,28 @@ characters = {
         "u": "\u1692",
         "e": "\u1693",
         "i": "\u1694",
-        "p": "\u169a"
+        "p": "\u169a",
     },
     "combination": {
         "ae": "\u1699",
         "ea": "\u1695",
         "ia": "\u1698",
         "oi": "\u1696",
-        "ui": "\u1697"
+        "ui": "\u1697",
     },
     "feather": {
         "head": "\u169b",
-        "tail": "\u169c"
-    }
+        "tail": "\u169c",
+    },
 }
 
-leadons = ["a", "e", "i", "o", "u"]
+leadons = [
+    "a",
+    "e",
+    "i",
+    "o",
+    "u",
+]
 
 REPLACEMENT = "\uFFFD"
 
@@ -76,8 +81,8 @@ def ogham(s, feather=True, replace_invalid="no", return_lead=False, lead=""):
     for c in s:
         if lead == "" and c in leadons:
             lead = c
-        elif lead+c in characters["combination"]:
-            new += characters["combination"][lead+c]
+        elif lead + c in characters["combination"]:
+            new += characters["combination"][lead + c]
             lead = ""
         else:
             if lead in characters["individual"]:
@@ -108,10 +113,7 @@ def ogham(s, feather=True, replace_invalid="no", return_lead=False, lead=""):
         lead = ""
 
     if feather:
-        new = \
-            characters["feather"]["head"] + \
-            new + \
-            characters["feather"]["tail"]
+        new = characters["feather"]["head"] + new + characters["feather"]["tail"]
 
     if return_lead:
         return new, lead

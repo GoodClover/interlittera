@@ -37,7 +37,7 @@ layouts = {
     if callable(func) and name.startswith(LAYOUT_PREFIX)
 }
 
-t = time()-t
+t = time() - t
 print(f"Done! {int(t*1000)}ms")
 print("Layouts:")
 print(" " + ", ".join(layouts))
@@ -49,6 +49,7 @@ curr_layout = None
 
 
 # Main #
+
 
 def enter_change_mode(from_hotkey=False):
     global in_change_mode
@@ -121,12 +122,18 @@ def change_mode(event):
 
 
 def main():
-    keyboard.add_hotkey(HOTKEY, enter_change_mode, args=(True,), suppress=True,
-                        timeout=1, trigger_on_release=True)
+    keyboard.add_hotkey(
+        HOTKEY,
+        enter_change_mode,
+        args=(True,),
+        suppress=True,
+        timeout=1,
+        trigger_on_release=True,
+    )
 
     print("Ready!\n", flush=True)
     while True:
-        sleep(60*60)
+        sleep(60 * 60)
         print("T'as been hour, wot doing lad.")
 
 

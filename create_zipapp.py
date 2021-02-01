@@ -17,7 +17,7 @@ while dest_file.exists():
     dest_file = dist / f"interlittera_{i}.pyz"
 
 
-t = time()-t
+t = time() - t
 print(f"done. {int(t*1000)}ms")
 print(f" {src=}")
 print(f" {dest_file=}")
@@ -27,5 +27,5 @@ t = time()
 
 zipapp.create_archive(src, dest_file)
 
-t = time()-t
+t = time() - t
 print(f"done!\a {int(t*1000)}ms")
